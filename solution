@@ -1,0 +1,2 @@
+if you get the SyntaxError: Cannot use import statement outside a module
+what fixed it for me was to add "type": "module", inside of package.json
