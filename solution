@@ -1,2 +1,18 @@
 if you get the SyntaxError: Cannot use import statement outside a module
 what fixed it for me was to add "type": "module", inside of package.json
+
+This is actually likely to cause the error:
+
+ReferenceError: require is not defined in ES module scope, you can use import instead
+This file is being treated as an ES module because it has a '.js' file extension and 
+'/Users/jakecoble/Desktop/BaseForGPT/package.json' contains "type": "module".
+To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+
+But to fix this you can simply add:
+
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+Into your code and now you can do things such as:
+
+const express = require("express")
